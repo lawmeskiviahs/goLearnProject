@@ -14,7 +14,8 @@ import (
 func main() {
 
 	// Connect to your local IPFS deamon running in the background.
-	content, err := os.ReadFile("photo.png")
+	content, err := os.ReadFile("bawa.txt")
+	// content, err := os.ReadFile("itachi.jpeg")
 	if err != nil {
         log.Fatal(err)
     }
@@ -34,10 +35,17 @@ func main() {
 	//
 	// Get the data from IPFS and output the contents into `struct` format.
 	//
-
+	
+	
 	data, err := sh.Cat(cid)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %s", err)
 		os.Exit(1)
 	}
+
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(data)
+	newStr := buf.String()
+
+	fmt.Println(newStr)
 }
