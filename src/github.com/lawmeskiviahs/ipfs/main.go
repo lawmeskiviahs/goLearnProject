@@ -21,23 +21,33 @@ func main() {
     }
 
 	// Where your local node is running on localhost:5001
-	sh := shell.NewShell("localhost:5001")
+	india := shell.NewShell("localhost:5001")
+	pakistan := shell.NewShell("localhost:5002")
 
 	// Add the file to IPFS
 	reader := bytes.NewReader(content)
-	cid, err := sh.Add(reader)
+	cid1, err := india.Add(reader)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %s", err)
 		os.Exit(1)
 	}
-	fmt.Printf("added %s\n", cid)
+	fmt.Printf("added %s\n", cid1)
+
+	content2, err := os.ReadFile("bawa2.txt")
+	reader2 := bytes.NewReader(content2)
+	cid2, err := pakistan.Add(reader2)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %s", err)
+		os.Exit(1)
+	}
+	fmt.Printf("added %s\n", cid2)
 
 	//
 	// Get the data from IPFS and output the contents into `struct` format.
 	//
 	
 	
-	data, err := sh.Cat(cid)
+	data, err := india.Cat(cid1)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %s", err)
 		os.Exit(1)
@@ -47,5 +57,20 @@ func main() {
 	buf.ReadFrom(data)
 	newStr := buf.String()
 
-	fmt.Println(newStr)
+	fmt.Println(newStr, "cid1")
+buf.Reset()
+	// CID2
+	dat, err := pakistan.Cat(cid2)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %s", err)
+		os.Exit(1)
+	}
+
+	// buff := new(bytes.Buffer)
+	buf.ReadFrom(dat)
+	newStrr := buf.String()
+
+	fmt.Println(newStrr, "cid2")
+
+	
 }
