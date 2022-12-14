@@ -12,7 +12,7 @@ and then send it to the clients you wish to share the network with <br>
  IPFS_PATH=~/.ipfs ipfs config show | grep "PeerID" <br>
 5. Now, add bootstrap node to client node config usring <br>
  IPFS_PATH=~/.ipfs ipfs bootstrap add /ip4/<ip address of bootnode>/tcp/4001/ipfs/<peer identity hash of bootnode> <br>
-6. Run the following command so that the daemon connects to a private network (only)
+6. Run the following command so that the daemon connects to a private network (only)<br>
  export LIBP2P_FORCE_PNET=1<br>
-7. Start daemon
+7. Start daemon<br>
  IPFS_PATH=~/.ipfs ipfs daemon <br>
