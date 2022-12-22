@@ -31,3 +31,5 @@ require (
 	golang.org/x/crypto v0.0.0-20190611184440-5c40567a22f8 // indirect
 	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
 )
+
+replace database => ../mongoDB
